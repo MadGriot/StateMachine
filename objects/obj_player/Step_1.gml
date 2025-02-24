@@ -1,11 +1,11 @@
 /// @description player control & target scanning
 
 //Exit the code if the player's currently dancing; let them dance in peace.
-if false /* TODO: check that 'state' has an appropriate value here (replace false) */ exit;
+if (state == States.Dancing) /* TODO: check that 'state' has an appropriate value here (replace false) */ exit;
 
 #region scanning
 
-if false /* TODO: check that 'state' has an appropriate value here (replace false) */ {
+if (obj_block.y > 1)  /* TODO: check that 'state' has an appropriate value here (replace false) */ {
 	var bestDistance = maxGrabDistance
 	grabTarget = noone;
 	
@@ -34,7 +34,7 @@ if keyboard_check_pressed(vk_space)
 {
 	#region dancing
 	//TODO: set 'state' to the appropriate value
-	
+	state = States.Dancing
 	hspeed = 0
 	vspeed = 0
 			
@@ -53,17 +53,18 @@ else if keyboard_check_pressed(ord("E"))
 	
 	//If we're already pushing, stop doing it.
 	
-	if false /* TODO: check that 'state' has an appropriate value here (replace false) */ {
+	if (state == States.Pushing)  /* TODO: check that 'state' has an appropriate value here (replace false) */ {
 		
 		//	TODO: set 'state' to the appropriate value
-		
+		state = States.Regular
 		//	TODO: make grabTarget stop moving (use a 'with' statement to get started)
+
 	}
 	//If scanning (see above) found a grab target, start pushing it.
-	else if instance_exists(grabTarget){
+	else if instance_exists(grabTarget) {
 		
 		//	TODO: set 'state' to the appropriate value
-		
+		state = States.Pushing
 		//Calculate grabDirection based on which axis you're closest to the grabTarget on
 		if abs(x-grabTarget.x)<abs(y-grabTarget.y){
 			grabDirection = GrabAxis.vertical	
@@ -81,7 +82,7 @@ var inputVect_x = (keyboard_check(vk_right)-keyboard_check(vk_left)),
 	speedSpeed = walkSpeed,
 	hCancel = 1, vCancel = 1;
 		
-if false /* TODO: check that 'state' has an appropriate value here (replace false) */ {
+if (state == States.Pushing)  /* TODO: check that 'state' has an appropriate value here (replace false) */ {
 	speedSpeed = pushSpeed;
 	
 	//grabDirection limits movement to one axis
@@ -90,6 +91,7 @@ if false /* TODO: check that 'state' has an appropriate value here (replace fals
 }
 
 hspeed = inputVect_x * speedSpeed * hCancel
+vspeed = inputVect_y * speedSpeed * vCancel
 //	TODO: repeat this speed calculation for vspeed
 
 /*
@@ -125,7 +127,7 @@ To understand this hspeed & vspeed operation, break it down into parts:
 
 #region pushing
 //If pushing, transfer the player's speed to the object they're pushing
-if (false /* TODO: check that 'state' has an appropriate value here (replace false) */) with grabTarget {
+if (state == States.Pushing)  /* TODO: check that 'state' has an appropriate value here (replace false) */ with grabTarget {
 	if !place_meeting(x + other.hspeed, y + other.hspeed, obj_block){
 		hspeed = other.hspeed
 		vspeed = other.vspeed

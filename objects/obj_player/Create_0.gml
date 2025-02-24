@@ -6,6 +6,9 @@
 enum States {
 	//	TODO: Add necessary values to this enum in order to define player states
 	// (refer to GrabAxis regarding formatting & syntax for enumerators)
+	Regular,
+	Pushing,
+	Dancing
 }
 
 enum GrabAxis {
@@ -18,7 +21,7 @@ enum GrabAxis {
 // 'state' will keep track of the player's state
 state = -1
 //	TODO: once you've defined the 'States' enumerator, set 'state' to an appropriate starting value.
-
+state = States.Regular
 
 // 'grabTarget' and 'grabDirection' are used for grabbing/pushing
 grabTarget = noone

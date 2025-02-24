@@ -1,7 +1,7 @@
 /// @description Spritesetting
 
 //Update player sprites while the player's in the walking state
-if false /* TODO: check that 'state' has an appropriate value here (replace false) */ {
+if (state == States.Regular) /* TODO: check that 'state' has an appropriate value here (replace false) */ {
 	if vspeed > 0 {
 		sprite_index = spr_player_down	
 	} else if vspeed < 0 {
@@ -16,7 +16,7 @@ if false /* TODO: check that 'state' has an appropriate value here (replace fals
 
 
 //animation freezes in place if you're not dancing and not moving
-if false /* TODO: check that 'state' has an appropriate value here (replace false) */
+if (!(state == States.Dancing)) /* TODO: check that 'state' has an appropriate value here (replace false) */
 	&& (vspeed = 0 and hspeed = 0) {
 	image_speed = 0	
 } else {
